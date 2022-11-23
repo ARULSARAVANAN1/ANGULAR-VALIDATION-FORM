@@ -1,0 +1,53 @@
+<div class="container">
+  <h3>REGISTRATION FORM</h3>
+  <div class="country">
+    <label>SELECT COUNTRY AND STATE: </label>
+    <select [(ngModel)]="country" (change)="setstate()" >
+      <option value="india">INDIA</option>
+      <option value="us">US</option>
+    </select>
+  </div>
+  
+  <div class="country">
+    <select >
+      <option *ngFor="let item of items" value ="items">{{item}}</option>
+    </select>
+  </div>
+
+  <br><br> 
+
+  <div class="date" >
+    {{date | date: 'short':'{{getdate}}' }} 
+  </div>
+
+  <br>  
+
+  <div>
+    <form #register="ngForm">
+      <div>
+        <label>USERNAME: </label>
+        <input required minlength="5" maxlength="13" pattern="[a-z A-Z]+" type="text" name="username" #username ="ngModel" autocomplete="off" ngModel><br>
+        <span *ngIf="username.invalid && username.touched">Please enter valid name</span>
+      </div>
+      
+      <br>
+      <div>
+        <label>PASSWORD: </label>
+        <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required type="password" name="password" #password ="ngModel" autocomplete="off" ngModel><br>
+        <span *ngIf="password.invalid && password.touched">Please enter valid password</span>
+      </div>
+      
+      <br>
+      <div>
+        <label>MOB NUMBER: </label>
+        <input pattern="[-+0-9]+" minlength="10"  maxlength="13" required type="text" name="number" #number ="ngModel" ngModel autocomplete="off"><br>
+        <span *ngIf="number.invalid && number.touched">Please enter valid mob number</span>
+      </div>
+      
+      <br>
+      
+         <button [disabled]="register.invalid" (click)="alertfun()"  >SUBMIT</button>
+
+    </form>
+  </div>
+</div>
